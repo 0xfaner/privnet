@@ -1,0 +1,13 @@
+# Generated Clash subscriptions contain plaintext credentials — never commit them.
+sub.yaml
+*.private.yaml
+*-private.yaml
+*-sub.yaml
+*credentials*
+client.yaml
+
+# Local extra rules for 'privnet.sh subscription -r' (machine-specific)
+rules.txt
+
+# macOS
+.DS_Store
