@@ -1,0 +1,62 @@
+# Example subscription layout produced by `privnet.sh subscription`.
+# Replace the placeholder values with your own server details.
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+
+proxies:
+  - name: "JP-VLESS"
+    type: vless
+    server: "REPLACE_WITH_JP_IP"
+    port: 443
+    uuid: "REPLACE_WITH_UUID"
+    network: tcp
+    udp: true
+    tls: true
+    flow: xtls-rprx-vision
+    servername: "www.microsoft.com"
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: "REPLACE_WITH_REALITY_PUBLIC_KEY"
+      short-id: "REPLACE_WITH_SHORT_ID"
+
+  - name: "JP-Hy2"
+    type: hysteria2
+    server: "REPLACE_WITH_JP_IP"
+    port: 8443
+    password: "REPLACE_WITH_HY2_PASSWORD"
+    sni: "mihomo.local"
+    skip-cert-verify: true
+    alpn:
+      - h3
+    obfs: salamander
+    obfs-password: "REPLACE_WITH_HY2_OBFS_PASSWORD"
+
+  - name: "JP-AnyTLS"
+    type: anytls
+    server: "REPLACE_WITH_JP_IP"
+    port: 9443
+    password: "REPLACE_WITH_ANYTLS_PASSWORD"
+    sni: "mihomo.local"
+    skip-cert-verify: true
+    udp: true
+
+proxy-groups:
+  - name: "PROXY"
+    type: select
+    proxies:
+      - JP
+      - DIRECT
+
+  - name: "JP"
+    type: select
+    proxies:
+      - JP-VLESS
+      - JP-Hy2
+      - JP-AnyTLS
+
+rules:
+  - GEOIP,CN,DIRECT
+  - MATCH,PROXY

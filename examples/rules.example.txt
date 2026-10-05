@@ -1,0 +1,14 @@
+# Extra Clash rules for: privnet.sh subscription -r FILE
+#
+# One rule per line; blank lines and '#' comments are ignored, and a
+# leading "- " is optional.
+#
+# Rules are emitted before the built-in defaults:
+#   GEOIP,CN,DIRECT
+#   MATCH,PROXY
+# Include one of those exact lines in your file to replace that default.
+#
+# Uncomment and adapt as needed:
+#   DOMAIN-SUFFIX,example.com,PROXY      # always through a node
+#   DOMAIN-SUFFIX,example.org,DIRECT     # never through a node
+#   IP-CIDR6,2001:db8::/32,PROXY         # IPv6 ranges via a node
